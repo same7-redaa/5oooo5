@@ -166,7 +166,12 @@ const translations = {
 
         // Language Toggle
         lang_english: "English",
-        lang_arabic: "العربية"
+        lang_arabic: "العربية",
+
+        // Meta & Loading
+        loading_clients: "جاري تحميل شعارات العملاء...",
+        site_title: "د. سارة الوكيل - مطورة مبيعات ومدربة محترفة",
+        site_description: "د. سارة الوكيل تساعد الشركات والمصانع في بناء وتطوير أقسام المبيعات وتحقيق نمو مستدام."
     },
 
     en: {
@@ -336,7 +341,12 @@ const translations = {
 
         // Language Toggle
         lang_english: "English",
-        lang_arabic: "العربية"
+        lang_arabic: "العربية",
+
+        // Meta & Loading
+        loading_clients: "Loading clients logos...",
+        site_title: "Dr. Sara Elwakil - Sales Developer & Professional Trainer",
+        site_description: "Dr. Sara Elwakil helps companies build and develop sales departments for sustainable growth."
     }
 };
 
