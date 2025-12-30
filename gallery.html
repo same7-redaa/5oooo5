@@ -219,49 +219,49 @@
             <p>مجموعة من قصص النجاح والإنجازات</p>
         </div>
 
-        <!-- شركة 1 -->
+        <!-- company-1 -->
         <div class="company-section" data-company="1">
-            <h2 class="company-title">شركة 1</h2>
+            <h2 class="company-title">company-1</h2>
             <div class="images-grid" id="company1-grid"></div>
         </div>
 
-        <!-- شركة 2 -->
+        <!-- company-2 -->
         <div class="company-section" data-company="2">
-            <h2 class="company-title">شركة 2</h2>
+            <h2 class="company-title">company-2</h2>
             <div class="images-grid" id="company2-grid"></div>
         </div>
 
-        <!-- شركة 3 -->
+        <!-- company-3 -->
         <div class="company-section" data-company="3">
-            <h2 class="company-title">شركة 3</h2>
+            <h2 class="company-title">company-3</h2>
             <div class="images-grid" id="company3-grid"></div>
         </div>
 
-        <!-- شركة 4 -->
+        <!-- company-4 -->
         <div class="company-section" data-company="4">
-            <h2 class="company-title">شركة 4</h2>
+            <h2 class="company-title">company-4</h2>
             <div class="images-grid" id="company4-grid"></div>
         </div>
 
-        <!-- شركة 5 -->
+        <!-- company-5 -->
         <div class="company-section" data-company="5">
-            <h2 class="company-title">شركة 5</h2>
+            <h2 class="company-title">company-5</h2>
             <div class="images-grid" id="company5-grid"></div>
         </div>
 
-        <!-- شركة 6 -->
+        <!-- company-6 -->
         <div class="company-section" data-company="6">
-            <h2 class="company-title">شركة 6</h2>
+            <h2 class="company-title">company-6</h2>
             <div class="images-grid" id="company6-grid"></div>
         </div>
 
-        <!-- شركة 7 -->
+        <!-- company-7 -->
         <div class="company-section" data-company="7">
-            <h2 class="company-title">شركة 7</h2>
+            <h2 class="company-title">company-7</h2>
             <div class="images-grid" id="company7-grid"></div>
         </div>
 
-        <!-- مجمع شركات -->
+        <!-- company-complex -->
         <div class="company-section" data-company="مجمع">
             <h2 class="company-title">المزيد من شركاء النجاح</h2>
             <div class="images-grid" id="company-complex-grid"></div>
@@ -384,13 +384,13 @@
                     item.className = 'gallery-item';
 
                     const imgElement = document.createElement('img');
-                    imgElement.dataset.src = `صور شركات/${folderName}/${img}`;
+                    imgElement.dataset.src = `companies/${folderName}/${img}`;
                     imgElement.alt = `صورة ${index + 1}`;
                     imgElement.loading = 'lazy';
                     imgElement.style.backgroundColor = '#1a1a2e';
 
                     item.appendChild(imgElement);
-                    item.onclick = () => openLightbox(`صور شركات/${folderName}/${img}`, images.map(i => `صور شركات/${folderName}/${i}`));
+                    item.onclick = () => openLightbox(`companies/${folderName}/${img}`, images.map(i => `companies/${folderName}/${i}`));
                     grid.appendChild(item);
                 });
             }
@@ -411,14 +411,14 @@
         });
 
         // Load all companies
-        loadCompanyImages(1, 'شركة 1', 'company1-grid');
-        loadCompanyImages(2, 'شركة 2', 'company2-grid');
-        loadCompanyImages(3, 'شركة 3', 'company3-grid');
-        loadCompanyImages(4, 'شركة 4', 'company4-grid');
-        loadCompanyImages(5, 'شركة 5', 'company5-grid');
-        loadCompanyImages(6, 'شركة 6', 'company6-grid');
-        loadCompanyImages(7, 'شركة 7', 'company7-grid');
-        loadCompanyImages('مجمع', 'مجمع شركات', 'company-complex-grid');
+        loadCompanyImages(1, 'company-1', 'company1-grid');
+        loadCompanyImages(2, 'company-2', 'company2-grid');
+        loadCompanyImages(3, 'company-3', 'company3-grid');
+        loadCompanyImages(4, 'company-4', 'company4-grid');
+        loadCompanyImages(5, 'company-5', 'company5-grid');
+        loadCompanyImages(6, 'company-6', 'company6-grid');
+        loadCompanyImages(7, 'company-7', 'company7-grid');
+        loadCompanyImages('مجمع', 'company-complex', 'company-complex-grid');
 
         // Observe all images
         setTimeout(() => {
