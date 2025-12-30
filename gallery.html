@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الأعمال - د. سارة الوكيل</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0F0C29 0%, #24243e 50%, #302B63 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .gallery-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 10px;
+            color: var(--accent-orange);
+        }
+
+        .gallery-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .company-section {
+            margin-bottom: 60px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .company-title {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-orange);
+        }
+
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            contain: layout style paint;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            contain: layout style paint;
+            transform: translateZ(0);
+        }
+
+        .gallery-item:hover {
+            opacity: 0.9;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            will-change: auto;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(255, 87, 34, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(255, 87, 34, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .company-section {
+                padding: 20px;
+            }
+
+            .images-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-text">سارة الوكيل</div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Adobe Icons Animated Background -->
+    <div class="neon-shapes">
+        <div class="neon-shape"></div>
+        <div class="neon-shape"></div>
+        <div class="neon-shape"></div>
+        <div class="neon-shape"></div>
+        <div class="neon-pen"></div>
+        <div class="neon-curve"></div>
+    </div>
+
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo-language-section">
+                    <a href="index.html" class="logo">
+                        <img src="logo.png" alt="Dr. Sara Elwakil Logo" class="logo-img">
+                    </a>
+                    <button class="language-toggle" onclick="toggleLanguage()">English</button>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="nav-link" data-translate="nav_home">الرئيسية</a></li>
+                    <li><a href="index.html#about" class="nav-link" data-translate="nav_about">من أنا</a></li>
+                    <li><a href="index.html#services" class="nav-link" data-translate="nav_services">خدماتي</a></li>
+                    <li><a href="index.html#testimonials" class="nav-link" data-translate="nav_testimonials">قصص
+                            النجاح</a></li>
+                    <li><a href="index.html#process" class="nav-link" data-translate="nav_process">خطوات العمل</a></li>
+                    <li><a href="index.html#contact" class="nav-link" data-translate="nav_contact">تواصل معي</a></li>
+                </ul>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="gallery-container">
+        <div class="gallery-header">
+            <h1>معرض الأعمال</h1>
+            <p>مجموعة من قصص النجاح والإنجازات</p>
+        </div>
+
+        <!-- شركة 1 -->
+        <div class="company-section" data-company="1">
+            <h2 class="company-title">شركة 1</h2>
+            <div class="images-grid" id="company1-grid"></div>
+        </div>
+
+        <!-- شركة 2 -->
+        <div class="company-section" data-company="2">
+            <h2 class="company-title">شركة 2</h2>
+            <div class="images-grid" id="company2-grid"></div>
+        </div>
+
+        <!-- شركة 3 -->
+        <div class="company-section" data-company="3">
+            <h2 class="company-title">شركة 3</h2>
+            <div class="images-grid" id="company3-grid"></div>
+        </div>
+
+        <!-- شركة 4 -->
+        <div class="company-section" data-company="4">
+            <h2 class="company-title">شركة 4</h2>
+            <div class="images-grid" id="company4-grid"></div>
+        </div>
+
+        <!-- شركة 5 -->
+        <div class="company-section" data-company="5">
+            <h2 class="company-title">شركة 5</h2>
+            <div class="images-grid" id="company5-grid"></div>
+        </div>
+
+        <!-- شركة 6 -->
+        <div class="company-section" data-company="6">
+            <h2 class="company-title">شركة 6</h2>
+            <div class="images-grid" id="company6-grid"></div>
+        </div>
+
+        <!-- شركة 7 -->
+        <div class="company-section" data-company="7">
+            <h2 class="company-title">شركة 7</h2>
+            <div class="images-grid" id="company7-grid"></div>
+        </div>
+
+        <!-- مجمع شركات -->
+        <div class="company-section" data-company="مجمع">
+            <h2 class="company-title">المزيد من شركاء النجاح</h2>
+            <div class="images-grid" id="company-complex-grid"></div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <span class="lightbox-nav lightbox-prev" id="lightbox-prev">
+            <i class="fas fa-chevron-right"></i>
+        </span>
+        <img src="" alt="Gallery Image" id="lightbox-img">
+        <span class="lightbox-nav lightbox-next" id="lightbox-next">
+            <i class="fas fa-chevron-left"></i>
+        </span>
+    </div>
+
+    <script>
+        // Company images data
+        const companyImages = {
+            1: [
+                '218aa68d-831e-4030-858c-6ba93b1f05d9.jpg',
+                '48b59542-cdf2-495d-8102-154823ad608a.jpg',
+                '5906ccf0-8dfc-409d-a38a-a9a5bfa33a2a.jpg',
+                '69d9610c-d8aa-4fad-8ca4-92496a99fe2e.jpg',
+                'WhatsApp Image 2025-12-01 at 8.19.59 AM.jpeg'
+            ],
+            2: [
+                '1d2bcfc8-e317-4e2b-9e13-fad0ae16443a.jpg',
+                '55ffcd65-5ec3-4f94-9790-7d59874cbee4.jpg',
+                '6bad72b6-451b-42d4-8380-be63b6e21601.jpg',
+                '971c1e87-dcae-4b68-a3b8-3ddea83e1a3a.jpg',
+                'c5dd5a14-bcc5-41f5-ab9c-d1fed341d0e4.jpg',
+                'dfec731a-30a9-4100-865a-45bf7f30fd59.jpg'
+            ],
+            3: [
+                'Capture(1).PNG',
+                'Capture.PNG',
+                'IMG_0097.JPG',
+                'IMG_0108.JPG',
+                'IMG_0134.JPG',
+                'IMG_0172.JPG',
+                'IMG_0179.JPG',
+                'IMG_0180.JPG',
+                'IMG_0194.JPG',
+                'IMG_0206.JPG',
+                'IMG_0211.JPG',
+                'IMG_0220.JPG',
+                'IMG_0221.JPG',
+                'IMG_0222.JPG',
+                'IMG_0234.JPG',
+                'IMG_0276.JPG',
+                'IMG_0277.JPG',
+                'IMG_0278.JPG',
+                'IMG_0279.JPG',
+                'IMG_0302.JPG',
+                'IMG_0304.JPG',
+                'IMG_0306.JPG',
+                'IMG_0308.JPG',
+                'IMG_0309.JPG',
+                'IMG_0310.JPG',
+                'IMG_0311.JPG',
+                'IMG_0312.JPG',
+                'IMG_0326.JPG',
+                'IMG_0327.JPG',
+                'WhatsApp Image 2025-10-30 at 6.24.17 AM.jpeg'
+            ],
+            4: [
+                '051ba4a9-2ab6-46f1-a19a-2bbdcbc1f69b.jpg',
+                'c0e71465-f129-44db-b0c9-31eb95eae1a7.jpg',
+                'd0028f8b-d366-4c89-bdac-4f599fedcf74.jpg',
+                'd4f8c7fc-9355-48d0-9cb8-95a079b44d6f.jpg',
+                'f41480a3-922d-4f00-989a-9e1738393ecb.jpg',
+                'f47db753-30ad-4550-8287-777999ed5321.jpg'
+            ],
+            5: [
+                'IMG_1813.JPG',
+                'IMG_1823.JPG',
+                'IMG_1831.JPG',
+                'IMG_1847.JPG',
+                'IMG_1852.JPG',
+                'IMG_1874.JPG'
+            ],
+            6: [
+                'WhatsApp Image 2025-10-30 at 5.49.47 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.49.48 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.49.49 AM (2).jpeg',
+                'WhatsApp Image 2025-10-30 at 5.49.49 AM.jpeg'
+            ],
+            7: [
+                'WhatsApp Image 2025-10-30 at 5.33.52 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.34.12 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.34.16 AM.jpeg'
+            ],
+            'مجمع': [
+                'WhatsApp Image 2025-10-30 at 5.34.17 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.34.18 AM (2).jpeg',
+                'WhatsApp Image 2025-10-30 at 5.34.18 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.34.19 AM (2).jpeg',
+                'WhatsApp Image 2025-10-30 at 5.34.20 AM (2).jpeg',
+                'WhatsApp Image 2025-10-30 at 5.48.50 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.49.37 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.49.44 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.49.45 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.49.46 AM (2).jpeg',
+                'WhatsApp Image 2025-10-30 at 5.49.46 AM.jpeg',
+                'WhatsApp Image 2025-10-30 at 5.49.50 AM.jpeg'
+            ]
+        };
+
+        // Load images for each company
+        function loadCompanyImages(companyId, folderName, gridId) {
+            const grid = document.getElementById(gridId);
+            const images = companyImages[companyId];
+
+            if (images && images.length > 0) {
+                images.forEach((img, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+
+                    const imgElement = document.createElement('img');
+                    imgElement.dataset.src = `صور شركات/${folderName}/${img}`;
+                    imgElement.alt = `صورة ${index + 1}`;
+                    imgElement.loading = 'lazy';
+                    imgElement.style.backgroundColor = '#1a1a2e';
+
+                    item.appendChild(imgElement);
+                    item.onclick = () => openLightbox(`صور شركات/${folderName}/${img}`, images.map(i => `صور شركات/${folderName}/${i}`));
+                    grid.appendChild(item);
+                });
+            }
+        }
+
+        // Intersection Observer for lazy loading
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px'
+        });
+
+        // Load all companies
+        loadCompanyImages(1, 'شركة 1', 'company1-grid');
+        loadCompanyImages(2, 'شركة 2', 'company2-grid');
+        loadCompanyImages(3, 'شركة 3', 'company3-grid');
+        loadCompanyImages(4, 'شركة 4', 'company4-grid');
+        loadCompanyImages(5, 'شركة 5', 'company5-grid');
+        loadCompanyImages(6, 'شركة 6', 'company6-grid');
+        loadCompanyImages(7, 'شركة 7', 'company7-grid');
+        loadCompanyImages('مجمع', 'مجمع شركات', 'company-complex-grid');
+
+        // Observe all images
+        setTimeout(() => {
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }, 100);
+
+        // Lightbox functionality
+        let currentImages = [];
+        let currentIndex = 0;
+
+        function openLightbox(imageSrc, allImages) {
+            currentImages = allImages;
+            currentIndex = allImages.indexOf(imageSrc);
+            document.getElementById('lightbox-img').src = imageSrc;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = currentImages.length - 1;
+            if (currentIndex >= currentImages.length) currentIndex = 0;
+            document.getElementById('lightbox-img').src = currentImages[currentIndex];
+        }
+
+        document.getElementById('lightbox-close').onclick = closeLightbox;
+        document.getElementById('lightbox-prev').onclick = () => changeImage(1);
+        document.getElementById('lightbox-next').onclick = () => changeImage(-1);
+        document.getElementById('lightbox').onclick = (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        };
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'ArrowRight') changeImage(1);
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.navbar')) {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+
+        // Loading Screen
+        window.addEventListener('load', () => {
+            const loadingScreen = document.querySelector('.loading-screen');
+            if (loadingScreen) {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }
+        });
+
+        // Language Toggle Function
+        function toggleLanguage() {
+            const currentLang = document.documentElement.lang;
+            const newLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.lang = newLang;
+            document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+
+            const langToggle = document.querySelector('.language-toggle');
+            if (langToggle) {
+                langToggle.textContent = newLang === 'ar' ? 'English' : 'العربية';
+            }
+        }
+    </script>
+    <script src="translations.js" defer></script>
+</body>
+
+</html>
