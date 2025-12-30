@@ -357,6 +357,7 @@ function setLanguage(lang) {
 }
 
 // Function to update page content
+// Function to update page content
 function updatePageContent(lang) {
     const t = translations[lang];
 
@@ -378,14 +379,29 @@ function updatePageContent(lang) {
     // Update language toggle button
     const langToggle = document.querySelector('.language-toggle');
     if (langToggle) {
-        langToggle.textContent = lang === 'ar' ? t.lang_english : t.lang_arabic;
+        langToggle.textContent = lang === 'ar' ? 'English' : 'عربي';
     }
 
-    // Update title
-    if (window.location.pathname.includes('gallery.html')) {
-        document.title = lang === 'ar' ? 'د. سارة الوكيل - معرض الأعمال' : 'Dr. Sara Elwakil - Portfolio';
+    // Determine font family
+    const font = lang === 'ar' ? "'Tajawal', sans-serif" : "'Inter', sans-serif";
+    document.body.style.fontFamily = font;
+
+    // Update title and description dynamically
+    if (t["site_title"]) {
+        document.title = t["site_title"];
     } else {
-        document.title = lang === 'ar' ? 'د. سارة الوكيل - مطورة مبيعات ومدربة محترفة' : 'Dr. Sara Elwakil - Sales Developer & Professional Trainer';
+        // Fallback titles if key not found (Legacy support)
+        if (window.location.pathname.includes('gallery.html')) {
+            document.title = lang === 'ar' ? 'معرض الأعمال - د. سارة الوكيل' : 'Dr. Sara Elwakil - Portfolio';
+        } else {
+            document.title = lang === 'ar' ? 'د. سارة الوكيل - مطورة مبيعات ومدربة محترفة' : 'Dr. Sara Elwakil - Sales Developer & Professional Trainer';
+        }
+    }
+
+    // Update meta description
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && t["site_description"]) {
+        metaDesc.content = t["site_description"];
     }
 }
 
