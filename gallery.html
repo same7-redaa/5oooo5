@@ -201,6 +201,8 @@
                     <li><a href="index.html#services" class="nav-link" data-translate="nav_services">خدماتي</a></li>
                     <li><a href="index.html#testimonials" class="nav-link" data-translate="nav_testimonials">قصص
                             النجاح</a></li>
+                    <li><a href="index.html#customer-reviews" class="nav-link" data-translate="nav_reviews">شهادات
+                            عملائنا</a></li>
                     <li><a href="index.html#process" class="nav-link" data-translate="nav_process">خطوات العمل</a></li>
                     <li><a href="index.html#contact" class="nav-link" data-translate="nav_contact">تواصل معي</a></li>
                 </ul>
@@ -280,8 +282,16 @@
         </span>
     </div>
 
-    <script src="translations.js?v=2"></script>
+    <script src="translations.js?v=4"></script>
     <script>
+        // Force initialization of language immediately
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof getCurrentLanguage === 'function' && typeof setLanguage === 'function') {
+                const currentLang = getCurrentLanguage();
+                setLanguage(currentLang);
+            }
+        });
+
         // Company images data
         const companyImages = {
             1: [
@@ -496,20 +506,17 @@
             }
         });
 
-        // Language Toggle Function
-        function toggleLanguage() {
-            const currentLang = document.documentElement.lang;
-            const newLang = currentLang === 'ar' ? 'en' : 'ar';
-            document.documentElement.lang = newLang;
-            document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
-
-            const langToggle = document.querySelector('.language-toggle');
-            if (langToggle) {
-                langToggle.textContent = newLang === 'ar' ? 'English' : 'العربية';
+        // Loading Screen
+        window.addEventListener('load', () => {
+            const loadingScreen = document.querySelector('.loading-screen');
+            if (loadingScreen) {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
             }
-        }
+        });
     </script>
-    <script src="translations.js" defer></script>
 </body>
 
 </html>
