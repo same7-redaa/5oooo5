@@ -150,6 +150,8 @@ const translations = {
         // Projects Page
         projects_page_title: "معرض الأعمال",
         projects_page_subtitle: "استكشف مجموعة متنوعة من مشاريع التصميم الإبداعية.",
+        page_gallery_title: "معرض الأعمال",
+        page_gallery_subtitle: "مجموعة من قصص النجاح والإنجازات",
 
         // Contact Section
         contact_title: "طرق التواصل",
@@ -325,6 +327,8 @@ const translations = {
         // Projects Page
         projects_page_title: "Portfolio",
         projects_page_subtitle: "Explore a diverse collection of creative design projects.",
+        page_gallery_title: "Gallery",
+        page_gallery_subtitle: "A collection of success stories and achievements",
 
         // Contact Section
         contact_title: "Contact Methods",
