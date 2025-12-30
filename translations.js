@@ -176,7 +176,7 @@ const translations = {
         nav_services: "Services",
         nav_testimonials: "Success Stories",
         nav_reviews: "Customer Testimonials",
-        nav_gallery: "Our Work",
+        nav_gallery: "Gallery",
 
         // Gallery Page
         company_1: "Company 1",
