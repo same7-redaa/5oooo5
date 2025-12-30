@@ -7,6 +7,17 @@ const translations = {
         nav_services: "خدماتي",
         nav_testimonials: "قصص النجاح",
         nav_reviews: "شهادات عملائنا",
+        nav_gallery: "معرض الأعمال",
+
+        // Gallery Page
+        company_1: "شركة 1",
+        company_2: "شركة 2",
+        company_3: "شركة 3",
+        company_4: "شركة 4",
+        company_5: "شركة 5",
+        company_6: "شركة 6",
+        company_7: "شركة 7",
+        company_complex: "المزيد من شركاء النجاح",
         nav_process: "خطوات العمل",
         nav_contact: "تواصل معي",
 
@@ -165,6 +176,17 @@ const translations = {
         nav_services: "Services",
         nav_testimonials: "Success Stories",
         nav_reviews: "Customer Testimonials",
+        nav_gallery: "Our Work",
+
+        // Gallery Page
+        company_1: "Company 1",
+        company_2: "Company 2",
+        company_3: "Company 3",
+        company_4: "Company 4",
+        company_5: "Company 5",
+        company_6: "Company 6",
+        company_7: "Company 7",
+        company_complex: "Our Success Partners",
         nav_process: "Work Process",
         nav_contact: "Contact",
 
