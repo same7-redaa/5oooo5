@@ -7,7 +7,6 @@ HOW_TO_REFRESH.md
 TROUBLESHOOTING_IMAGES.md
 firebase-config.js
 firestore.rules
-صور شركات/
-لوجوهات/
-صور شركات مضغوطة/
 .vercel
+node_modules/
+.DS_Store
